@@ -10,6 +10,7 @@ os.environ['GOOGLE_CLOUD_PROJECT']='g-playground-1'
 
 def process_prompt():
     user_query = st.session_state.user_query
+    st.chat_message("user").write(user_query)
     dataset = 'g-playground-1.internal_billing_dataset.gcp_billing_export_v1_010767_AD0D5D_BCC8F6'
     schema = ""
     with open("schema.json", "r") as f:
@@ -32,7 +33,7 @@ def process_prompt():
     llm = VertexAI(model_name="code-bison", max_output_tokens=2048)
     # in case it decides to spit out markdown-formatted SQL instead of straight SQL
     sql = llm(prompt = template).replace("```", "").replace("sql", "")
-    st.write("Running query... \n```\n{}\n```".format(sql))
+    st.chat_message("assistant").write("Running query... \n```\n{}\n```".format(sql))
     out = run_query(sql)
     st.bar_chart(out)
 
