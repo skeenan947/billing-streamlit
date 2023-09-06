@@ -15,70 +15,9 @@ def process_prompt():
     with open("schema.json", "r") as f:
         schema = f.read()
 
-    template = """Given schema: {schema}
-    where service.id is an unusable identifier and service.description is the name of the service
-    FORMAT is not a valid keyword in bigquery
-    use invoice.month for any data prior to the current month
-    INTERVAL must be in days, not months or years
-
-    input: write a BQ SQL query: how much did I spend on compute in the last 90 days?
-    output: SELECT
-        sum(total_cost) as my_cost,
-        FORMAT_DATE("%Y-%m", usage_start_time) AS month,
-    FROM `{dataset}`
-        WHERE service.description LIKE "%Compute%"
-        AND usage_start_time >= TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), MONTH) - INTERVAL 90 day
-    GROUP BY month
-    
-    input: write a BQ SQL query: how much did I spend in the last month?
-    output: SELECT
-        sum(total_cost) as my_cost,
-        FORMAT_DATE("%Y-%m", usage_start_time) AS month
-    FROM `{dataset}`
-        WHERE usage_start_time >= TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), MONTH) - INTERVAL 30 day
-    GROUP BY month
-
-    input: write a BQ SQL query: how much did I spend last month?
-    output: SELECT
-        sum(total_cost) as my_cost,
-        FORMAT_DATE("%Y-%m", usage_start_time) AS month
-    FROM `{dataset}`
-        WHERE usage_start_time >= TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), MONTH) - INTERVAL 60 day
-        AND usage_start_time <= TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), MONTH) - INTERVAL 30 day
-    GROUP BY month
-
-    input: write a BQ SQL query: how much did I spend on compute over the last 6 months?
-    output: SELECT
-        sum(cost) as my_cost,
-        FORMAT_DATE("%Y-%m", usage_start_time) AS month
-    FROM `{dataset}`
-    WHERE service.description LIKE "%Compute Engine%" 
-    AND usage_start_time >= TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), MONTH) - INTERVAL 180 day
-
-    input: write a BQ SQL query: How much did I spend on vertex in the last month?
-    output: SELECT SUM(cost) AS total_cost 
-    FROM `{dataset}`
-    WHERE service.description LIKE "%Vertex% 
-    AND usage_start_time >= TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), MONTH) - INTERVAL 30 day
-
-    input: write a BQ SQL query: How much did I spend on BQ over the last 6 months?
-    output: SELECT SUM(cost) AS total_cost,
-    FORMAT_DATE("%Y-%m", usage_start_time) AS month
-    FROM `{dataset}`
-    WHERE service.description LIKE "%BigQuery%"
-    AND usage_start_time >= TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), MONTH) - INTERVAL 180 day
-
-    input: Write a BQ SQL query: How much did I spend on compute this quarter?
-    output: SELECT
-        sum(cost) as my_cost,
-        FORMAT_DATE("%Y-%m", usage_start_time) AS month
-    FROM `g-playground-1.internal_billing_dataset.gcp_billing_export_v1_010767_AD0D5D_BCC8F6`
-    WHERE service.description LIKE "%Compute Engine%" 
-    AND usage_start_time >= TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), QUARTER) - INTERVAL 90 day
-    GROUP BY month
-
-    input: write a BQ SQL query: {question}
-    output:""".format(schema=schema, question=user_query, dataset=dataset)
+    with open("prompt.txt", "r") as f:
+        prompt = f.read()
+    template = prompt.format(schema=schema, question=user_query, dataset=dataset)
 
     # Use for Llama
     # n_gpu_layers = 40  # Change this value based on your model and your GPU VRAM pool.
