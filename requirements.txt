@@ -1,0 +1,7 @@
+langchain[llms]
+google-cloud-aiplatform
+streamlit
+db-dtypes
+sqlalchemy
+sqlalchemy-bigquery
+google-cloud-bigquery-storage

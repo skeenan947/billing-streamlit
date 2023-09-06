@@ -1,0 +1,72 @@
+[{
+    "columns": [{
+      "column_name": "billing_account_id",
+      "data_type": "STRING"
+    }, {
+      "column_name": "service",
+      "data_type": "STRUCT\u003cid STRING, description STRING\u003e"
+    }, {
+      "column_name": "sku",
+      "data_type": "STRUCT\u003cid STRING, description STRING\u003e"
+    }, {
+      "column_name": "usage_start_time",
+      "data_type": "TIMESTAMP"
+    }, {
+      "column_name": "usage_end_time",
+      "data_type": "TIMESTAMP"
+    }, {
+      "column_name": "project",
+      "data_type": "STRUCT\u003cid STRING, number STRING, name STRING, labels ARRAY\u003cSTRUCT\u003ckey STRING, value STRING\u003e\u003e, ancestry_numbers STRING, ancestors ARRAY\u003cSTRUCT\u003cresource_name STRING, display_name STRING\u003e\u003e\u003e"
+    }, {
+      "column_name": "labels",
+      "data_type": "ARRAY\u003cSTRUCT\u003ckey STRING, value STRING\u003e\u003e"
+    }, {
+      "column_name": "system_labels",
+      "data_type": "ARRAY\u003cSTRUCT\u003ckey STRING, value STRING\u003e\u003e"
+    }, {
+      "column_name": "location",
+      "data_type": "STRUCT\u003clocation STRING, country STRING, region STRING, zone STRING\u003e"
+    }, {
+      "column_name": "export_time",
+      "data_type": "TIMESTAMP"
+    }, {
+      "column_name": "cost",
+      "data_type": "FLOAT64"
+    }, {
+      "column_name": "currency",
+      "data_type": "STRING"
+    }, {
+      "column_name": "currency_conversion_rate",
+      "data_type": "FLOAT64"
+    }, {
+      "column_name": "usage",
+      "data_type": "STRUCT\u003camount FLOAT64, unit STRING, amount_in_pricing_units FLOAT64, pricing_unit STRING\u003e"
+    }, {
+      "column_name": "credits",
+      "data_type": "ARRAY\u003cSTRUCT\u003cname STRING, amount FLOAT64, full_name STRING, id STRING, type STRING\u003e\u003e"
+    }, {
+      "column_name": "invoice",
+      "data_type": "STRUCT\u003cmonth STRING\u003e"
+    }, {
+      "column_name": "cost_type",
+      "data_type": "STRING"
+    }, {
+      "column_name": "adjustment_info",
+      "data_type": "STRUCT\u003cid STRING, description STRING, mode STRING, type STRING\u003e"
+    }, {
+      "column_name": "tags",
+      "data_type": "ARRAY\u003cSTRUCT\u003ckey STRING, value STRING, inherited BOOL, namespace STRING\u003e\u003e"
+    }, {
+      "column_name": "cost_at_list",
+      "data_type": "FLOAT64"
+    }, {
+      "column_name": "transaction_type",
+      "data_type": "STRING"
+    }, {
+      "column_name": "seller_name",
+      "data_type": "STRING"
+    }, {
+      "column_name": "_PARTITIONTIME",
+      "data_type": "TIMESTAMP"
+    }]
+  }]
