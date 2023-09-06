@@ -91,7 +91,7 @@ def process_prompt():
     #    verbose=True,
     #)
     llm = VertexAI(model_name="code-bison", max_output_tokens=2048)
-    # in case it decides to spit out markdown JSON
+    # in case it decides to spit out markdown-formatted SQL instead of straight SQL
     sql = llm(prompt = template).replace("```", "").replace("sql", "")
     st.write("Running query... \n```\n{}\n```".format(sql))
     out = run_query(sql)
