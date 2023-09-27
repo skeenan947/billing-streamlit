@@ -15,12 +15,9 @@ from langchain.agents import AgentExecutor
 from langchain.prompts import PromptTemplate
 
 
-
-os.environ['GOOGLE_CLOUD_PROJECT']='g-playground-1'
-
-project = 'g-playground-1'
-dataset = 'internal_billing_dataset'
-table = 'gcp_billing_export_v1_010767_AD0D5D_BCC8F6'
+project = os.environ['GOOGLE_CLOUD_PROJECT']
+dataset = os.environ['BILLING_DATASET']
+table = os.environ['BILLING_TABLE']
 sqlalchemy_url = f"bigquery://{os.environ['GOOGLE_CLOUD_PROJECT']}/{dataset}"
 
 
