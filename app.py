@@ -4,13 +4,10 @@ from langchain.llms import VertexAI #LlamaCpp
 from google.cloud import bigquery
 import logging
 
-os.environ['GOOGLE_CLOUD_PROJECT']='g-playground-1'
-
-
 def process_prompt():
     user_query = st.session_state.user_query
     st.chat_message("user").write(user_query)
-    dataset = 'g-playground-1.internal_billing_dataset.gcp_billing_export_v1_010767_AD0D5D_BCC8F6'
+    dataset = os.environ['BILLING_DATASET']
 
     with open("schema.json", "r") as f:
         schema = f.read()
