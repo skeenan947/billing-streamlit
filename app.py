@@ -56,6 +56,7 @@ def run_query(bq_query):
                 rows.set_index('year', inplace=True)
         except Exception as e:
             logging.error(e)
+            exit(1)
     return rows
 
 
